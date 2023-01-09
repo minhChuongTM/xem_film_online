@@ -17,6 +17,6 @@ class Movie extends Model
         'created_at'
     ];
     public function film() {
-        return $this->belongsTo(Film::class, 'id');
+        return $this->belongsTo(Film::class);
     }
 }

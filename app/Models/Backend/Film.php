@@ -49,6 +49,6 @@ class Film extends Model
         return $this->hasOne(FilmCategory::class, 'film_id');
     }
     public function movie() {
-        return $this->belongsToMany(Movie::class, 'film_id');
+        return $this->hasMany(Movie::class, 'film_id');
     }
 }

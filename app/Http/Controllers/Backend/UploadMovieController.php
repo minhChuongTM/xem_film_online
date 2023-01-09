@@ -14,10 +14,18 @@ use Illuminate\Support\Facades\DB;
 class UploadMovieController extends Controller
 {
     public function index() {
-        $movie = Movie::all();
-        $movie->movie();
-        dd($movie->toArray());
-        return view('admin.modules.uploadVideo.index');
+        $movie = Film::all();
+        foreach($movie as $film) {
+            $link_movie = $film->movie->toArray();
+            foreach($link_movie as $link){
+               $film->linkStr .= $link['link'];
+               $film->EpisodesStr .= $link['episodes']; 
+               $film->resolutionStr .= $link['resolution'];
+               $film->film_idStr .= $link['film_id'];
+            }
+        }
+        
+        return view('admin.modules.uploadVideo.index', ['movie'=> $movie]);
     }
 
     public function create()

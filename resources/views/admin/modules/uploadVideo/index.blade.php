@@ -47,30 +47,24 @@
                         <th>ID</th>
                         <th>AVATAR</th>
                         <th>NAME_FILM</th>
-                        <th>LINK FILM</th>
+                        <th>FILM LINK</th>
                         <th>CREATED_AT</th>
                         <th>EDIT</th>
                         <TH>DELETE</TH>
                     </tr>
                 </thead>
                 <tbody>
-
-                    @foreach ($film as $item)
+                    @foreach ($movie as $item)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $item->film_idStr }}</td>
                             <td><img src="{{ $item->avatar }}" alt="" width="150px"></td>
                             <td>{{ $item->name_film }}</td>
-                            <td>{{ $item->movie_format }}</td>
-                            <td>{{$item->categoriesStr}}</td>
-                            <td>{{$item->castStr}}</td>
-                            <td>{{ $item->film_style }}</td>
-                            <td>{{ $item->name }}</td>
-                            <td>{{ $item->created_at }}</td>
-                            <td><a href="{{ route('admin.film.editFilm', ['id' => $item->id]) }}">edit</a></td>
-                            <td><a href="{{ route('admin.film.deleteFilm', ['id'=>$item->id]) }}">delete</a></td>
+                            {{-- <td>{{ $item->linkStr }}</td> --}}
+                            <td><video src="{{ $item->linkStr }}" width="250px"></video></td>
+                            <td>Edit</td>
+                            <td>Delete</td>
                         </tr>
                     @endforeach
-
                 </tbody>
             </table>
         </div>

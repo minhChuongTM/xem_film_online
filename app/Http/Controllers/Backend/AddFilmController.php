@@ -28,12 +28,13 @@ class AddFilmController extends Controller
         foreach ($films as $film) {
             $categories = $film->categories->toArray();
             $film->categoriesStr = '';
-            $casts = $film->cast->toArray();
-            $film->castStr = '';
             foreach ($categories as $category) {
                 $film->categoriesStr .= ', ' . $category['name'];
             }
             $film->categoriesStr = substr($film->categoriesStr, 2);
+
+            $casts = $film->cast->toArray();
+            $film->castStr = '';
             foreach ($casts as $cast) {
                 $film->castStr .= ', ' . $cast['name'];
             }
