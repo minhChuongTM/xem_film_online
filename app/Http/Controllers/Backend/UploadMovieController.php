@@ -13,19 +13,14 @@ use Illuminate\Support\Facades\DB;
 
 class UploadMovieController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $movie = Film::all();
-        foreach($movie as $film) {
+        foreach ($movie as $film) {
             $link_movie = $film->movie->toArray();
-            foreach($link_movie as $link){
-               $film->linkStr .= $link['link'];
-               $film->EpisodesStr .= $link['episodes']; 
-               $film->resolutionStr .= $link['resolution'];
-               $film->film_idStr .= $link['film_id'];
-            }
+            
         }
-        
-        return view('admin.modules.uploadVideo.index', ['movie'=> $movie]);
+        return view('admin.modules.uploadVideo.index', ['movie' => $movie]);
     }
 
     public function create()
@@ -42,7 +37,7 @@ class UploadMovieController extends Controller
         $name_movie = $request->link->getClientOriginalName();
         $path = '/film/video/' . $name_movie;
         $file->move(public_path("/film/video"), $name_movie);
-        
+
         $movie = [
             'link' => $path,
             'resolution' => $request->resolution,
@@ -52,7 +47,45 @@ class UploadMovieController extends Controller
         Movie::create($movie);
         return redirect()->route('admin.UploadMovie.create');
     }
-    public function edit($id) {
-
+    public function edit($id)
+    {
+        $Movie = Movie::find($id);
+        // dd($Movie->toArray());
+        $film_id = Film::all();
+        return view('admin.modules.uploadVideo.edit', ['Movie' => $Movie, 'film' => $film_id]);
+    }
+    public function update(UploadMovieRequest $request, $id)
+    {
+        /**move video to folder */
+        $movie = Movie::findOrFail($id);
+        $file = $request->link;
+        // dd($file);
+        if ($request->hasFile('link')) {
+            if (!empty($movie['link'])) {
+                unlink(public_path() . $movie->link);
+            }
+            $name_movie = $request->link->getClientOriginalName();
+            $path = '/film/video/' . $name_movie;
+            $file->move(public_path("/film/video"), $name_movie);
+        }
+        $data = [
+            'link' => $path,
+            'resolution' => $request->resolution,
+            'episodes' => $request->episodes,
+            'film_id' => $request->film_id
+        ];
+        $movie->update($data);
+        return redirect()->route('admin.UploadMovie.index');
+    }
+    public function delete($id)
+    {
+        $movie = Movie::findOrFail($id);
+        if (!empty($movie)) {
+            if (!empty($movie->link)) {
+                unlink(public_path() . $movie->link);
+            }
+        }
+        $movie->delete();
+        return redirect()->route('admin.uploadVideo.index');
     }
 }

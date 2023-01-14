@@ -47,6 +47,7 @@
                         <th>ID</th>
                         <th>AVATAR</th>
                         <th>NAME_FILM</th>
+                        <th>EPISODES</th>
                         <th>FILM LINK</th>
                         <th>CREATED_AT</th>
                         <th>EDIT</th>
@@ -56,13 +57,14 @@
                 <tbody>
                     @foreach ($movie as $item)
                         <tr>
-                            <td>{{ $item->film_idStr }}</td>
-                            <td><img src="{{ $item->avatar }}" alt="" width="150px"></td>
-                            <td>{{ $item->name_film }}</td>
-                            {{-- <td>{{ $item->linkStr }}</td> --}}
-                            <td><video src="{{ $item->linkStr }}" width="250px"></video></td>
-                            <td>Edit</td>
-                            <td>Delete</td>
+                            <td>{{ $item->movie['id']}}</td>
+                            <td><img src="" alt="" width="150px"></td>
+                            <td></td>
+                            <td></td>
+                            <td><video src="" width="250px"></video></td>
+                            <td></td>
+                            <td><a href="{{ route('admin.UploadMovie.edit', ['id'=>$item->movie_id]) }}">Edit</a></td>
+                            <td><a href="{{ route('admin.UploadMovie.delete', ['id'=>$item->movie_id]) }}">Delete</a></td>
                         </tr>
                     @endforeach
                 </tbody>
