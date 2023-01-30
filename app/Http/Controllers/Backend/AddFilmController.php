@@ -205,7 +205,15 @@ class AddFilmController extends Controller
                 $film->images()->delete(); // delete bảng 1: nhiều and 1:1
             }
         }
+        $film->movie()->sync([]);
+        if(!empty($film)){
+            if(!empty($film->movie['link'])){
+                dd($film->movie['link']);
+                unlink(public_path() . $film->movie['link']);
+            }
+        }
         $film->delete();
+
         return redirect()->route('admin.film.indexFilm');
     }
 }
