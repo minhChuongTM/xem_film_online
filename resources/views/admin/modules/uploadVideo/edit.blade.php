@@ -126,6 +126,7 @@
                 <div class="form-group">
                     <select class="form-control" data-placeholder="Tên Phim" style="width: 100%;" name="film_id">
                         @php
+                        // kiểm tra khóa ngoại và khóa chính của các bảng có trùng nhau hay không
                             function film($array, $id) {
                                 foreach ($array as $film) {
                                     if ($id == $film['id']) {

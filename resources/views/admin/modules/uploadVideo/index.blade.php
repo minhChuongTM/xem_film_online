@@ -55,16 +55,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($movie as $item)
+                    @foreach ($link as $item)
                         <tr>
-                            <td>{{ $item->movie['id']}}</td>
-                            <td><img src="" alt="" width="150px"></td>
-                            <td></td>
-                            <td></td>
-                            <td><video src="" width="250px"></video></td>
-                            <td></td>
-                            <td><a href="{{ route('admin.UploadMovie.edit', ['id'=>$item->movie_id]) }}">Edit</a></td>
-                            <td><a href="{{ route('admin.UploadMovie.delete', ['id'=>$item->movie_id]) }}">Delete</a></td>
+                            <td>{{ $item->id}}</td>
+                            <td><img src="{{$item->film['avatar']}}" alt="" width="150px"></td>
+                            <td>{{ $item->Film['name_film'] }}</td>
+                            <td>{{ $item->episodes }}</td>
+                            <td><video src="{{ $item->link}}" width="250px"></video></td>
+                            <td>{{ $item->created_at }}</td>
+                            <td><a href="{{ route('admin.UploadMovie.edit', ['id'=>$item->id]) }}">Edit</a></td>
+                            <td><a href="{{ route('admin.UploadMovie.delete', ['id'=>$item->id]) }}">Delete</a></td>
                         </tr>
                     @endforeach
                 </tbody>

@@ -15,11 +15,16 @@ class UploadMovieController extends Controller
 {
     public function index()
     {
-        $movie = Film::all();
-        foreach ($movie as $film) {
-            $link_movie = $film->movie->toArray();
-        }
-        return view('admin.modules.uploadVideo.index', ['movie' => $link_movie]);
+        $link = Movie::all();
+        foreach ($link as $video) {
+            $link_movie = $video->film->toArray();
+            foreach ($link_movie as $film){
+                
+            }
+
+        }var_dump($link);
+       
+        return view('admin.modules.uploadVideo.index', ['link' => $link]);
     }
 
     public function create()
