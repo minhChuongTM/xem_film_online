@@ -10,12 +10,4 @@ class Language extends Model
     use HasFactory;
     protected $table = 'language';
     public $timeStamp = true;
-
-    // public function filmLanguage() {
-    //     return $this->hasOne(Film::class, 'language_id');
-    // }
-
-    // public function languageTable() {
-    //     return $this->morphTo();
-    // }
 }
